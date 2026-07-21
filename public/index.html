@@ -1,1 +1,64 @@
-﻿<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>Monster Mayhem</title><link rel="stylesheet" href="style.css"></head><body><header><div><h1>MONSTER MAYHEM</h1><p>Real-time concurrent board battle</p></div><div class="numbers"><span>Games played <b id="total">0</b></span><span>Won <b id="won">0</b> / Lost <b id="lost">0</b></span></div></header><main><section id="lobby" class="panel"><h2>Enter the arena</h2><input id="name" maxlength="20" placeholder="Your name"><div class="row"><button id="create">Create game</button><input id="code" maxlength="6" placeholder="Game code"><button id="join">Join</button></div><p id="notice"></p><h3>Open games</h3><div id="games"></div></section><section id="game" hidden><aside class="panel"><h2>Game <span id="gameId"></span></h2><p>Status: <b id="status"></b> · Round <b id="round"></b></p><div id="players"></div><button id="start">Start game</button><button id="end">End my turn</button><h3>How to play</h3><p>Choose a monster, then click your coloured edge to place it. Click your monster and a destination to move.</p><div class="choices"><button data-kind="vampire">🧛 Vampire</button><button data-kind="werewolf">🐺 Werewolf</button><button data-kind="ghost">👻 Ghost</button></div></aside><div><div id="board" aria-label="10 by 10 game board"></div><p id="message"></p></div><aside class="panel"><h3>Live events</h3><ol id="events"></ol></aside></section></main><script src="/socket.io/socket.io.js"></script><script src="app.js"></script></body></html>
+﻿<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Monster Mayhem</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+<header>
+    <div><h1>MONSTER MAYHEM</h1>
+        <p>Real-time concurrent board battle</p></div>
+    <div class="numbers">
+        <span>Games played <b id="total">0</b></span>
+        <span>Won <b id="won">0</b> / Lost <b id="lost">0</b></span>
+    </div>
+</header>
+
+<main>
+    <section id="lobby" class="panel"><h2>Enter the arena</h2>
+        <input id="name" maxlength="20" placeholder="Your name">
+        <div class="row">
+            <button id="create">Create game</button>
+            <input id="code" maxlength="6" placeholder="Game code">
+            <button id="join">Join</button>
+        </div>
+
+        <p id="notice"></p>
+        <h3>Open games</h3>
+        <div id="games"></div>
+    </section>
+    <section id="game" hidden>
+        <aside class="panel">
+            <h2>Game <span id="gameId"></span></h2>
+            <p>Status: <b id="status"></b> · Round <b id="round"></b></p>
+            <div id="players"></div>
+            <button id="start">Start game</button>
+            <button id="end">End my turn</button>
+
+            <h3>How to play</h3>
+            <p>Choose a monster, then click your coloured edge to place it. Click your monster and a destination to
+                move.</p>
+            <div class="choices">
+                <button data-kind="vampire">🧛 Vampire</button>
+                <button data-kind="werewolf">🐺 Werewolf</button>
+                <button data-kind="ghost">👻 Ghost</button>
+            </div>
+        </aside>
+
+        <div>
+            <div id="board" aria-label="10 by 10 game board"></div>
+            <p id="message"></p></div>
+        <aside class="panel"><h3>Live events</h3>
+            <ol id="events"></ol>
+        </aside>
+    </section>
+</main>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="app.js"></script>
+
+</body>
+</html>
