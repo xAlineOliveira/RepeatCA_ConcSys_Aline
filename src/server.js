@@ -28,7 +28,7 @@ io.on('connection', s => {
         'game:start': g => g.start(s.id),
         'monster:place': (g, p) => g.place(s.id, p.kind, p.row, p.col),
         'monster:move': (g, p) => g.move(s.id, p.monsterId, p.row, p.col),
-        'turn:end': g => g.endTurn(s.id)
+        'turn:end': (g, payload) => {g.endTurn(s.id, payload.round);}
     };
     for (const [e, fn] of Object.entries(actions)) s.on(e, safe(async p => {
         if (!s.data.gameId) throw Error('Join a game first');

@@ -99,8 +99,8 @@ class GameEngine {
         m.row = row;
         m.col = col;
         m.moved = this.round;
-        if (target) this.fight(m, target);
         this.log(`${p.name} moved ${m.kind}`);
+        if (target) this.fight(m, target);
         this.check()
     }
 
@@ -114,13 +114,16 @@ class GameEngine {
             this.monsters = this.monsters.filter(x => x.id !== m.id);
             this.player(m.ownerId).removed++
         }
-        this.log(win ? `${win} won a battle` : `Both ${a.kind}s were removed`)
+        this.log(win ? `${win.charAt(0).toUpperCase() + win.slice(1)} won a battle` : `Both ${a.kind}s were removed`)
     }
 
-    endTurn(id) {
+    endTurn(id, expectedRound) {
+        if (expectedRound !== this.round) {
+            throw new Error("This turn belongs to an older round");}
         const p = this.active(id);
         p.ended = true;
         this.log(`${p.name} ended turn`);
+
         if (this.players.filter(x => x.removed < 10).every(x => x.ended)) {
             this.round++;
             this.reset();

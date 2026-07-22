@@ -23,9 +23,9 @@ test('New monster is placed only on own edge and cannot move immediately', () =>
 });
 test('Round advances only after every active player ends', () => {
     const g = game();
-    g.endTurn('a');
+    g.endTurn('a', g.round);
     assert.equal(g.round, 1);
-    g.endTurn('b');
+    g.endTurn('b', g.round);
     assert.equal(g.round, 2)
 });
 test('Same monsters remove each other', () => {
@@ -56,4 +56,12 @@ test('Opponent blocks a straight path', () => {
         moved: 0
     }];
     assert.throws(() => g.move('a', 'x', 2, 7), /blocks/)
+});
+test("Rejects an end-turn action from an older round", () => {
+    const g = game();
+
+    assert.throws(
+        () => g.endTurn("a", 0),
+        /older round/
+    );
 });
